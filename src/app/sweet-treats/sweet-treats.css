@@ -1,0 +1,95 @@
+.section-header {
+  text-align: center;
+  padding: 30px;
+}
+
+.section-header h2 {
+  color: var(--emerald);
+  font-size: 2.5rem;
+  margin-bottom: 5px;
+}
+
+.section-header p {
+  margin: 0;
+  color: rgba(4, 99, 7, 0.72);
+}
+
+.empty-state {
+  text-align: center;
+  color: rgba(4, 99, 7, 0.72);
+  padding: 24px 20px 40px;
+}
+
+.recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  padding: 20px;
+}
+
+.recipe-card {
+  background: linear-gradient(180deg, #fffde7, #fff9cc);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(4, 99, 7, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.recipe-card:hover {
+  transform: translateY(-6px);
+}
+
+.card-bg {
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.card-bg-fallback {
+  background: linear-gradient(135deg, rgba(4, 99, 7, 0.18), rgba(255, 193, 7, 0.22));
+}
+
+.difficulty-tag {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: var(--honey);
+  color: var(--emerald);
+  padding: 5px 12px;
+  border-radius: 15px;
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+
+.card-info {
+  padding: 20px;
+}
+
+.card-info h3 {
+  margin: 0 0 15px 0;
+  color: var(--emerald);
+}
+
+.label {
+  margin: 0 0 6px;
+  color: var(--emerald);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.text {
+  margin: 0 0 14px;
+  color: rgba(4, 99, 7, 0.8);
+}
+
+.method {
+  white-space: pre-wrap;
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

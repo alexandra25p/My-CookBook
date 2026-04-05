@@ -1,0 +1,36 @@
+.navbar {
+  display: flex;
+  justify-content: space-between; /* Logo la stânga, link-uri la dreapta */
+  align-items: center;
+  background-color: var(--emerald);
+  padding: 15px 40px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.logo {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: var(--honey);
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+.nav-links {
+  list-style: none; /* Aici dispar punctele negre! */
+  display: flex;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  text-decoration: none; /* Dispare sublinerea albastră */
+  color: white;
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: var(--honey);
+  transform: scale(1.1);
+}

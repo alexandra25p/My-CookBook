@@ -1,0 +1,32 @@
+<div class="section-header">
+  <h2>🍰 Sweet Treats</h2>
+  <p>Retetele tale dulci apar aici.</p>
+</div>
+
+@if (recipes.length === 0) {
+  <p class="empty-state">Nu ai adaugat inca nicio reteta din categoria Sweet.</p>
+} @else {
+  <div class="recipe-grid">
+    @for (recipe of recipes; track recipe.id) {
+      <article class="recipe-card">
+        @if (recipe.image) {
+          <div class="card-bg" [style.backgroundImage]="'url(' + recipe.image + ')'">
+            <div class="difficulty-tag">{{ recipe.time }} min</div>
+          </div>
+        } @else {
+          <div class="card-bg card-bg-fallback">
+            <div class="difficulty-tag">{{ recipe.time }} min</div>
+          </div>
+        }
+
+        <div class="card-info">
+          <h3>{{ recipe.title }}</h3>
+          <p class="label">Ingrediente</p>
+          <p class="text">{{ recipe.ingredients }}</p>
+          <p class="label">Mod de gatire</p>
+          <p class="text method">{{ recipe.method }}</p>
+        </div>
+      </article>
+    }
+  </div>
+}

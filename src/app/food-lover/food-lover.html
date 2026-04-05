@@ -1,0 +1,40 @@
+<div class="section-header">
+	<h2>🥗 Food Lover</h2>
+	<p>Retetele tale sarate apar aici.</p>
+</div>
+
+@if (recipes.length === 0) {
+	<p class="empty-state">Nu ai adaugat inca nicio reteta din categoria Food.</p>
+} @else {
+	<div class="recipe-grid">
+		@for (recipe of recipes; track recipe.id) {
+			<article class="recipe-card">
+				@if (recipe.image) {
+					<div class="card-bg" [style.backgroundImage]="'url(' + recipe.image + ')'">
+						<div class="overlay">
+							<div class="recipe-meta">
+								<span>{{ recipe.time }} min</span>
+							</div>
+						</div>
+					</div>
+				} @else {
+					<div class="card-bg card-bg-fallback">
+						<div class="overlay">
+							<div class="recipe-meta">
+								<span>{{ recipe.time }} min</span>
+							</div>
+						</div>
+					</div>
+				}
+
+				<div class="card-info">
+					<h3>{{ recipe.title }}</h3>
+					<p class="label">Ingrediente</p>
+					<p class="text">{{ recipe.ingredients }}</p>
+					<p class="label">Mod de gatire</p>
+					<p class="text method">{{ recipe.method }}</p>
+				</div>
+			</article>
+		}
+	</div>
+}

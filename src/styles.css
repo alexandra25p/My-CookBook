@@ -1,1 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
+/* Definim culorile tale preferate */
+:root {
+  --emerald: #046307;      /* Verde smarald */
+  --honey: #FFC107;        /* Galben miere */
+  --cream: #FFFDE7;        /* Fundal crem pal */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--cream);
+}
+
+* {
+  box-sizing: border-box;
+}

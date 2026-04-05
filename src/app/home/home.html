@@ -1,0 +1,82 @@
+<section class="hero">
+  <div class="hero-overlay">
+    <p class="hero-kicker">My Personal Cook Book</p>
+    <h1>Bine ai venit în bucătăria mea</h1>
+    <p class="hero-copy">Aici poți adăuga rețete noi cu poză, ingrediente, timp, tip și modul complet de gătire.</p>
+  </div>
+</section>
+
+<section class="content-shell">
+  <form class="recipe-form card" [formGroup]="recipeForm" (ngSubmit)="saveRecipe()">
+    <div class="section-heading">
+      <h2>Adaugă o rețetă</h2>
+      <p>Completează câmpurile de mai jos și salvează rețeta în browser.</p>
+    </div>
+
+    <div class="field">
+      <label for="title">Titlul rețetei</label>
+      <input id="title" type="text" formControlName="title" placeholder="Paste cremoase cu pui" />
+      @if (recipeForm.controls.title.touched && recipeForm.controls.title.invalid) {
+        <p class="error">Titlul trebuie să aibă cel puțin 3 caractere.</p>
+      }
+    </div>
+
+    <div class="field-grid">
+      <div class="field">
+        <label for="type">Tipul rețetei</label>
+        <select id="type" formControlName="type">
+          <option value="food">Food / sărat</option>
+          <option value="sweet">Sweet / desert</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="time">Timp de gătire</label>
+        <input id="time" type="number" min="1" formControlName="time" placeholder="30" />
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="ingredients">Ingrediente</label>
+      <textarea
+        id="ingredients"
+        rows="5"
+        formControlName="ingredients"
+        placeholder="Ex: 2 ouă, 200g făină, 1 lingură zahăr"
+      ></textarea>
+      @if (recipeForm.controls.ingredients.touched && recipeForm.controls.ingredients.invalid) {
+        <p class="error">Scrie ingredientele rețetei.</p>
+      }
+    </div>
+
+    <div class="field">
+      <label for="method">Mod de gătire</label>
+      <textarea
+        id="method"
+        rows="10"
+        formControlName="method"
+        placeholder="Scrie pașii compleți ai rețetei aici..."
+      ></textarea>
+      @if (recipeForm.controls.method.touched && recipeForm.controls.method.invalid) {
+        <p class="error">Descrierea modului de gătire trebuie să fie mai lungă.</p>
+      }
+    </div>
+
+    <div class="field upload-field">
+      <label for="image">Poză rețetă</label>
+      <input id="image" type="file" accept="image/*" (change)="onFileSelected($event)" />
+
+      @if (imagePreview) {
+        <img class="image-preview" [src]="imagePreview" alt="Previzualizare rețetă" />
+      } @else {
+        <p class="hint">Alege o imagine JPG, PNG sau WEBP pentru rețetă.</p>
+      }
+
+      @if (recipeForm.controls.image.touched && recipeForm.controls.image.invalid) {
+        <p class="error">Trebuie să alegi o poză.</p>
+      }
+    </div>
+
+    <button class="save-btn" type="submit">Salvează rețeta</button>
+  </form>
+</section>
