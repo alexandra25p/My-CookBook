@@ -1,8 +1,9 @@
-/* Definim culorile tale preferate */
+
 :root {
-  --emerald: #046307;      /* Verde smarald */
-  --honey: #FFC107;        /* Galben miere */
-  --cream: #FFFDE7;        /* Fundal crem pal */
+  --emerald: #046307;
+  --emerald-rgb: 4, 99, 7;
+  --honey: #FFC107;       
+  --cream: #FFFDE7;        
 }
 
 body {

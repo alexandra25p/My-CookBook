@@ -19,18 +19,22 @@ describe('RecipeService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should store and return recipes', () => {
+  it('should store and return recipes', async () => {
     const recipe: Recipe = {
       id: 1,
-      title: 'Clătite pufoase',
+      title: 'Fluffy Pancakes',
       type: 'sweet',
       time: 20,
-      ingredients: 'ouă, făină, lapte',
-      method: 'Amestecă ingredientele și gătește pe tigaie.',
+      ingredients: [
+        { name: 'eggs', amount: 2, unit: 'buc' },
+        { name: 'flour', amount: 200, unit: 'g' },
+        { name: 'milk', amount: 300, unit: 'ml' },
+      ],
+      method: 'Mix everything and cook in a pan.',
       image: 'data:image/png;base64,abc',
     };
 
-    service.addRecipe(recipe);
+    await service.addRecipe(recipe);
 
     expect(service.getRecipes()).toEqual([recipe]);
   });

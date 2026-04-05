@@ -1,32 +1,35 @@
 <div class="section-header">
   <h2>🍰 Sweet Treats</h2>
-  <p>Retetele tale dulci apar aici.</p>
+  <p>Little sweet moments, saved one recipe at a time.</p>
 </div>
 
-@if (recipes.length === 0) {
-  <p class="empty-state">Nu ai adaugat inca nicio reteta din categoria Sweet.</p>
-} @else {
-  <div class="recipe-grid">
-    @for (recipe of recipes; track recipe.id) {
-      <article class="recipe-card">
-        @if (recipe.image) {
-          <div class="card-bg" [style.backgroundImage]="'url(' + recipe.image + ')'">
-            <div class="difficulty-tag">{{ recipe.time }} min</div>
-          </div>
-        } @else {
-          <div class="card-bg card-bg-fallback">
-            <div class="difficulty-tag">{{ recipe.time }} min</div>
-          </div>
-        }
+@if (recipes$ | async; as recipes) {
+  @if (recipes.length === 0) {
+    <p class="empty-state">Nothing sweet here yet. Add your first dessert and bring this page to life.</p>
+  } @else {
+    <div class="recipe-grid">
+      @for (recipe of recipes; track recipe.id) {
+        <article class="recipe-card compact-card">
+          @if (recipe.image) {
+            <div class="card-bg" [style.backgroundImage]="'url(' + recipe.image + ')'">
+              <span class="time-chip">{{ recipe.time }} min</span>
+            </div>
+          } @else {
+            <div class="card-bg card-bg-fallback">
+              <span class="time-chip">{{ recipe.time }} min</span>
+            </div>
+          }
 
-        <div class="card-info">
-          <h3>{{ recipe.title }}</h3>
-          <p class="label">Ingrediente</p>
-          <p class="text">{{ recipe.ingredients }}</p>
-          <p class="label">Mod de gatire</p>
-          <p class="text method">{{ recipe.method }}</p>
-        </div>
-      </article>
-    }
-  </div>
+          <div class="card-info compact-info">
+            <h3>{{ recipe.title }}</h3>
+            <button type="button" class="show-btn" (click)="showFullRecipe(recipe)">Show full recipe</button>
+          </div>
+        </article>
+      }
+    </div>
+  }
+}
+
+@if (selectedRecipe) {
+	<app-recipe-modal [recipe]="selectedRecipe" (close)="closeRecipeModal()" />
 }

@@ -1,0 +1,92 @@
+@if (recipe) {
+  <div class="recipe-modal-backdrop" (click)="closeModal()">
+    <article class="recipe-modal" [class.is-editing]="!!editingRecipe" (click)="$event.stopPropagation()">
+      @if (editingRecipe) {
+        <div class="modal-heading">
+          <div>
+            <p class="label">Edit recipe</p>
+            <h3>Edit {{ editingRecipe.title }}</h3>
+          </div>
+          <button type="button" class="modal-close-btn" (click)="cancelEdit()">Back</button>
+        </div>
+
+        <div class="edit-form">
+          <div class="field">
+            <label for="editOwnerCode">Owner code</label>
+            <input id="editOwnerCode" type="password" [value]="editOwnerCode" (input)="editOwnerCode = ($any($event.target).value)" placeholder="Enter owner code" />
+          </div>
+
+          <div class="field">
+            <label for="editTitle">Recipe title</label>
+            <input id="editTitle" type="text" [value]="editingRecipe.title" (input)="editingRecipe!.title = ($any($event.target).value)" />
+          </div>
+
+          <div class="field-grid edit-grid">
+            <div class="field">
+              <label for="editTime">Cooking time</label>
+              <input id="editTime" type="number" min="1" [value]="editingRecipe.time" (input)="updateEditedTime($any($event.target).value)" />
+            </div>
+
+            <div class="field">
+              <label for="editImage">Recipe photo URL / data</label>
+              <input id="editImage" type="text" [value]="editingRecipe.image" (input)="editingRecipe!.image = ($any($event.target).value)" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Ingredients</label>
+            <div class="ingredient-editor">
+              @for (ingredient of editingRecipe.ingredients; track $index) {
+                <div class="ingredient-row">
+                  <input type="number" min="0.1" step="0.1" [value]="ingredient.amount" (input)="updateEditedIngredient($index, 'amount', ($any($event.target).value))" />
+                  <select [value]="ingredient.unit" (change)="updateEditedIngredient($index, 'unit', ($any($event.target).value))">
+                    <option value="g">g</option>
+                    <option value="ml">ml</option>
+                    <option value="buc">buc</option>
+                  </select>
+                  <input type="text" [value]="ingredient.name" (input)="updateEditedIngredient($index, 'name', ($any($event.target).value))" placeholder="Ingredient name" />
+                  <button type="button" class="ingredient-remove-btn" (click)="removeEditedIngredient($index)">Remove</button>
+                </div>
+              }
+            </div>
+            <button type="button" class="add-ingredient-btn edit-add-btn" (click)="addEditedIngredient()">Add ingredient</button>
+          </div>
+
+          <div class="field">
+            <label for="editMethod">Cooking method</label>
+            <textarea id="editMethod" rows="8" [value]="editingRecipe.method" (input)="editingRecipe!.method = ($any($event.target).value)"></textarea>
+          </div>
+
+          @if (editError) {
+            <p class="error">{{ editError }}</p>
+          }
+
+          <div class="modal-actions">
+            <button type="button" class="action-btn action-btn-secondary" (click)="saveEditedRecipe()">Save changes</button>
+            <button type="button" class="action-btn action-btn-danger" (click)="cancelEdit()">Cancel</button>
+          </div>
+        </div>
+      } @else {
+        <button type="button" class="modal-close-btn" (click)="closeModal()">Close</button>
+        <h3 class="recipe-title">{{ recipe.title }}</h3>
+        <p class="label">Cooking Time</p>
+        <p class="text">{{ recipe.time }} min</p>
+
+        <p class="label">Ingredients</p>
+        <ul class="ingredients-list modal-ingredients">
+          @for (ingredient of recipe.ingredients; track $index) {
+            <li>{{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }}</li>
+          }
+        </ul>
+
+        <p class="label">Cooking Method</p>
+        <p class="text method">{{ recipe.method }}</p>
+
+        <div class="modal-actions">
+          <button type="button" class="action-btn action-btn-secondary" (click)="beginEditRecipe()">Edit</button>
+          <button type="button" class="action-btn action-btn-danger" (click)="deleteRecipe()">Delete</button>
+        </div>
+      }
+    </article>
+  </div>
+}
